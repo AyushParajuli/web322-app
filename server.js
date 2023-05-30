@@ -1,4 +1,3 @@
-
 var express = require("express");
 var app = express();
 require("dotenv").config();
@@ -15,36 +14,26 @@ app.get("/", function(req, res) {
 app.get("/about", function(req, res) {
   res.sendFile(path.join(__dirname, "./views/about.html"));
 });
-// Initialize blog-service and start the server
-blogService.initialize()
-  .then(() => {
-    // Route to get all published posts
-    app.get("/blog", function(req, res) {
-      blogService.getPublishedPosts()
-        .then(publishedPosts => res.json(publishedPosts))
-        .catch(error => res.status(500).send(error));
-    });
-    // Route to get all posts
-    app.get("/posts", function(req, res) {
-      blogService.getAllPosts()
-        .then(allPosts => res.json(allPosts))
-        .catch(error => res.status(500).send({message : error}));
-    });
-    // Route to get all categories
-    app.get("/categories", function(req, res) {
-      blogService.getCategories()
-        .then(allCategories => res.json(allCategories))
-        .catch(error => res.status(500).send({message : error}));
-    });
-    // Route for unmatched routes
-    app.get("*", function(req, res) {
-      res.status(404).send("Page Not Found");
-    });
-    // Start the server and listen on the specified port
-    app.listen(HTTP_PORT, function() {
-      console.log("Express http server listening on port " + HTTP_PORT);
-    });
-  })
-  .catch(error => {
-    console.error("Failed to initialize blog-service:", error);
-  });
+// Start the server and listen on the specified port
+app.listen(HTTP_PORT, function() {
+  console.log("Express http server listening on port " + HTTP_PORT);
+});
+// Route to get all published posts
+app.get("/blog", function(req, res) {
+  const publishedPosts = blogService.getPublishedPosts();
+  res.json(publishedPosts);
+});
+// Route to get all posts
+app.get("/posts", function(req, res) {
+  const allPosts = blogService.getAllPosts();
+  res.json(allPosts);
+});
+// Route to get all categories
+app.get("/categories", function(req, res) {
+  const allCategories = blogService.getAllCategories();
+  res.json(allCategories);
+});
+// Route for unmatched routes
+app.get("*", function(req, res) {
+  res.status(404).send("Page Not Found");
+});
