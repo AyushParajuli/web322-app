@@ -35,6 +35,20 @@ function initialize() {
   });
 }
 
+// function initialize() {
+//   try {
+//     const postsData = fs.readFileSync(postsFile, "utf8");
+//     posts = JSON.parse(postsData);
+
+//     const categoriesData = fs.readFileSync(categoriesFile, "utf8");
+//     categories = JSON.parse(categoriesData);
+
+//     return Promise.resolve();
+//   } catch (error) {
+//     return Promise.reject("Error initializing blog service: " + error);
+//   }
+// }
+
 function getAllPosts() {
   return new Promise((resolve, reject) => {
     if (posts.length > 0) {
@@ -72,3 +86,5 @@ module.exports = {
   getPublishedPosts,
   getCategories
 };
+
+//console.log(__dirname)
