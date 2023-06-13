@@ -1,9 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-
 const postsFile = path.join(__dirname, "data/posts.json");
 const categoriesFile = path.join(__dirname, "data/categories.json");
-
 let posts = [];
 let categories = [];
 
@@ -34,20 +32,6 @@ function initialize() {
     });
   });
 }
-
-// function initialize() {
-//   try {
-//     const postsData = fs.readFileSync(postsFile, "utf8");
-//     posts = JSON.parse(postsData);
-
-//     const categoriesData = fs.readFileSync(categoriesFile, "utf8");
-//     categories = JSON.parse(categoriesData);
-
-//     return Promise.resolve();
-//   } catch (error) {
-//     return Promise.reject("Error initializing blog service: " + error);
-//   }
-// }
 
 function getAllPosts() {
   return new Promise((resolve, reject) => {
@@ -80,11 +64,32 @@ function getCategories() {
   });
 }
 
+function addPost(postData) {
+  return new Promise((resolve, reject) => {
+    if (postData.published === undefined) {
+      postData.published = false;
+    } else {
+      postData.published = true;
+    }
+
+    postData.id = posts.length + 1;
+    posts.push(postData);
+
+    // Save the updated posts array to the file
+    fs.writeFile(postsFile, JSON.stringify(posts), err => {
+      if (err) {
+        reject("Error writing to posts file");
+      } else {
+        resolve(postData);
+      }
+    });
+  });
+}
+
 module.exports = {
   initialize,
   getAllPosts,
   getPublishedPosts,
-  getCategories
+  getCategories,
+  addPost
 };
-
-//console.log(__dirname)

@@ -17,7 +17,12 @@ var express = require("express");
 var app = express();
 require("dotenv").config();
 var path = require("path");
+
 const blogService = require("./blog-service.js");
+const multer = require("multer");
+const cloudinary = require('cloudinary');
+const streamifier = require('streamifier');
+
 var HTTP_PORT = process.env.PORT || 8080;
 // Serve static files from the "public" directory
 app.use(express.static("public"));
@@ -34,6 +39,62 @@ app.get("/about", function(req, res) {
 app.get("/posts/add", function(req, res){
   res.sendFile(path.join(__dirname, "./views/addposts.html"));
 });
+
+// Set the cloudinary config 
+cloudinary.config({
+  cloud_name : 'dvejlsqre',
+  api_key : '179383226592744',
+  api_secret : 'tevSCedsCurSw4BtMZFNaxiMK58',
+  secure: true
+});
+
+
+
+// Add the route for adding a new post
+app.post("/posts/add", upload.single("featureImage"), function(req, res) {
+  if (req.file) {
+    let streamUpload = (req) => {
+      return new Promise((resolve, reject) => {
+        let stream = cloudinary.uploader.upload_stream(
+          (error, result) => {
+            if (result) {
+              resolve(result);
+            } else {
+              reject(error);
+            }
+          }
+        );
+        streamifier.createReadStream(req.file.buffer).pipe(stream);
+      });
+    };
+
+    async function upload(req) {
+      let result = await streamUpload(req);
+      console.log(result);
+      return result;
+    }
+
+    upload(req)
+      .then((uploaded) => {
+        processPost(uploaded.url);
+        res.redirect("/posts");
+      })
+      .catch((error) => {
+        console.error("Error uploading file:", error);
+        res.status(500).send("Error uploading file");
+      });
+  } else {
+    processPost("");
+    res.redirect("/posts");
+  }
+
+  function processPost(imageUrl) {
+    req.body.featureImage = imageUrl;
+    // TODO: Process the req.body and add it as a new Blog Post before redirecting to /posts
+  }
+});
+
+
 
 // Initialize blog-service and start the server
 blogService.initialize()
@@ -68,3 +129,6 @@ blogService.initialize()
   .catch(error => {
     console.error("Failed to initialize blog-service:", error);
   });
+
+  // upload variable without the disk storage
+  const upload = multer();
