@@ -108,12 +108,41 @@ blogService.initialize()
         .then(publishedPosts => res.json(publishedPosts))
         .catch(error => res.status(500).send(error));
     });
-    // Route to get all posts
-    app.get("/posts", function(req, res) {
-      blogService.getAllPosts()
-        .then(allPosts => res.json(allPosts))
-        .catch(error => res.status(500).send({message : error}));
+    
+    
+    // Route to get all posts with optional filters
+      app.get("/posts", function(req, res) {
+      const category = req.query.category; // Get the value of the "category" query parameter
+      const minDate = req.query.minDate; // Get the value of the "minDate" query parameter
+
+      if (category) {
+        // If "category" query parameter is present, filter by category
+        blogService.getPostsByCategory(category)
+          .then(filteredPosts => res.json(filteredPosts))
+          .catch(error => res.status(500).send({ message: error }));
+      } else if (minDate) {
+        // If "minDate" query parameter is present, filter by minimum date
+        blogService.getPostsByMinDate(minDate)
+          .then(filteredPosts => res.json(filteredPosts))
+          .catch(error => res.status(500).send({ message: error }));
+      } else {
+        // If no filters are present, return all posts
+        blogService.getAllPosts()
+          .then(allPosts => res.json(allPosts))
+          .catch(error => res.status(500).send({ message: error }));
+      }
     });
+
+    // Route to get a single post by ID
+    app.get("/post/:id", function(req, res) {
+      const postId = parseInt(req.params.id); // Get the value of the "id" parameter as an integer
+
+      blogService.getPostById(postId)
+        .then(post => res.json(post))
+        .catch(error => res.status(500).send({ message: error }));
+    });
+
+
     // Route to get all categories
     app.get("/categories", function(req, res) {
       blogService.getCategories()
