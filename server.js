@@ -40,6 +40,10 @@ app.get("/posts/add", function(req, res){
   res.sendFile(path.join(__dirname, "./views/addposts.html"));
 });
 
+
+// upload variable without the disk storage
+const upload = multer();
+
 // Set the cloudinary config 
 cloudinary.config({
   cloud_name : 'dvejlsqre',
@@ -47,7 +51,6 @@ cloudinary.config({
   api_secret : 'tevSCedsCurSw4BtMZFNaxiMK58',
   secure: true
 });
-
 
 
 // Add the route for adding a new post
@@ -130,5 +133,3 @@ blogService.initialize()
     console.error("Failed to initialize blog-service:", error);
   });
 
-  // upload variable without the disk storage
-  const upload = multer();
