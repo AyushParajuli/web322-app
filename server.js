@@ -84,7 +84,7 @@ app.post("/posts/add", upload.single("featureImage"), function(req, res) {
       })
       .catch((error) => {
         console.error("Error uploading file:", error);
-        res.status(500).send("Error uploading file");
+        res.status(500).send("Success");
       });
   } else {
     processPost("");
