@@ -37,7 +37,7 @@ app.get("/about", function(req, res) {
 
 //Server the addposts.html file from the views folder.
 app.get("/posts/add", function(req, res){
-  res.sendFile(path.join(__dirname, "./views/addposts.html"));
+  res.sendFile(path.join(__dirname, "./views/addPost.html"));
 });
 
 
