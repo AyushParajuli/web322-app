@@ -73,10 +73,16 @@ function addPost(postData) {
     }
 
     postData.id = posts.length + 1;
+
+    // Set the postDate to the current date in the format "YYYY-MM-DD"
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().slice(0, 10);
+    postData.postDate = formattedDate;
+
     posts.push(postData);
 
     // Save the updated posts array to the file
-    fs.writeFile(postsFile, JSON.stringify(posts), err => {
+    fs.writeFile(postsFile, JSON.stringify(posts), (err) => {
       if (err) {
         reject("Error writing to posts file");
       } else {
@@ -85,6 +91,7 @@ function addPost(postData) {
     });
   });
 }
+
 
 function getPostsByCategory(category) {
   return new Promise((resolve, reject) => {
@@ -119,6 +126,18 @@ function getPostById(id) {
   });
 }
 
+function getPublishedPostsByCategory(category) {
+  return new Promise((resolve, reject) => {
+    const publishedPosts = posts.filter(post => post.published && post.category === category);
+    if (publishedPosts.length > 0) {
+      resolve(publishedPosts);
+    } else {
+      reject("No results returned");
+    }
+  });
+}
+
+
 module.exports = {
   initialize,
   getAllPosts,
@@ -127,5 +146,6 @@ module.exports = {
   addPost,
   getPostsByCategory,
   getPostsByMinDate,
-  getPostById
+  getPostById,
+  getPublishedPostsByCategory
 };

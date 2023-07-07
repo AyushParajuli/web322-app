@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Latest compiled and minified Bootstrap 3.4.1 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <title>WEB322 Student Name's Blog</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-brand" href="#">WEB322 - Student Name</span>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active" ><a href="/posts">Posts</a></li>
+                    <li><a href="/categories">Categories</a></li>
+                    <li><a href="/posts/add">Add Post</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container" style="padding-top:60px">
+        <div class="row">
+    <div class="col-md-12">
+        <h2>Posts</h2>
+        <hr />
+
+        <div class="table-responsive">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th>Post&nbsp;ID</th>
+                        <th>Title</th>
+                        <th>Post&nbsp;Date</th>
+                        <th>Category</th>
+                        <th>Published</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Donec luctus aliquet odio.</td>
+                        <td>2020-02-25</td>
+                        <td><a href="/posts?category=3">3</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Lorem ipsum dolor sit</td>
+                        <td>2020-10-06</td>
+                        <td><a href="/posts?category=1">1</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>felis ullamcorper</td>
+                        <td>2020-02-06</td>
+                        <td><a href="/posts?category=1">1</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>dictum magna.</td>
+                        <td>2020-03-06</td>
+                        <td><a href="/posts?category=4">4</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>purus, accumsan interdum libero</td>
+                        <td>2020-06-13</td>
+                        <td><a href="/posts?category=2">2</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>nec tempus mauris erat</td>
+                        <td>2020-05-29</td>
+                        <td><a href="/posts?category=5">5</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>nunc ac mattis</td>
+                        <td>2020-08-15</td>
+                        <td><a href="/posts?category=3">3</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>ac urna. Ut tincidunt</td>
+                        <td>2020-12-01</td>
+                        <td><a href="/posts?category=1">1</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Nulla semper tellus id</td>
+                        <td>2020-12-26</td>
+                        <td><a href="/posts?category=4">4</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>augue ut lacus.</td>
+                        <td>2020-11-18</td>
+                        <td><a href="/posts?category=3">3</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>in, cursus</td>
+                        <td>2020-01-28</td>
+                        <td><a href="/posts?category=4">4</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>Suspendisse aliquet, sem</td>
+                        <td>2020-03-11</td>
+                        <td><a href="/posts?category=4">4</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>metus. In lorem. Donec</td>
+                        <td>2020-04-16</td>
+                        <td><a href="/posts?category=5">5</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>nunc id enim.</td>
+                        <td>2020-04-09</td>
+                        <td><a href="/posts?category=1">1</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>iaculis aliquet</td>
+                        <td>2020-07-12</td>
+                        <td><a href="/posts?category=2">2</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>orci. Donec</td>
+                        <td>2020-07-13</td>
+                        <td><a href="/posts?category=5">5</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>in, cursus et, eros.</td>
+                        <td>2020-11-23</td>
+                        <td><a href="/posts?category=3">3</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>Curabitur massa. Vestibulum</td>
+                        <td>2020-01-29</td>
+                        <td><a href="/posts?category=5">5</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>scelerisque mollis. Phasellus libero</td>
+                        <td>2020-08-08</td>
+                        <td><a href="/posts?category=3">3</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>facilisis, magna tellus faucibus</td>
+                        <td>2020-05-29</td>
+                        <td><a href="/posts?category=1">1</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>ultrices posuere cubilia Curae</td>
+                        <td>2020-03-21</td>
+                        <td><a href="/posts?category=1">1</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>augue malesuada</td>
+                        <td>2020-06-21</td>
+                        <td><a href="/posts?category=1">1</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>Aenean gravida nunc</td>
+                        <td>2020-03-27</td>
+                        <td><a href="/posts?category=1">1</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>dui. Cum sociis natoque</td>
+                        <td>2020-11-15</td>
+                        <td><a href="/posts?category=4">4</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>ligula consectetuer rhoncus.</td>
+                        <td>2020-07-18</td>
+                        <td><a href="/posts?category=4">4</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td>pede. Cum sociis</td>
+                        <td>2020-10-03</td>
+                        <td><a href="/posts?category=1">1</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td>orci sem eget</td>
+                        <td>2020-06-06</td>
+                        <td><a href="/posts?category=1">1</a></td>
+                        <td>true</td>
+                    </tr>
+                    <tr>
+                        <td>28</td>
+                        <td>dictum mi, ac mattis</td>
+                        <td>2020-06-30</td>
+                        <td><a href="/posts?category=4">4</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>29</td>
+                        <td>eu neque pellentesque</td>
+                        <td>2020-05-08</td>
+                        <td><a href="/posts?category=4">4</a></td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>30</td>
+                        <td>Suspendisse tristique neque venenatis</td>
+                        <td>2020-11-26</td>
+                        <td><a href="/posts?category=1">1</a></td>
+                        <td>false</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-12 text-center">
+  {{#unless posts}}
+    <strong>{{message}}</strong>
+  {{/unless}}
+</div>
+
+</div>
+</div>
+    </div>
+
+    <!-- Latest compiled and minified jQuery 3.6.0 JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified Bootstrap 3.4.1 JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
