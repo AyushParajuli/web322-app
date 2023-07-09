@@ -104,26 +104,11 @@ app.post('/posts/add', upload.single('featureImage'), function (req, res) {
   }
   function processPost(imageUrl) {
     req.body.featureImage = imageUrl;
-    const postData = {
-      // Extract the necessary fields from req.body and add postDate
-      title: req.body.title,
-      body: req.body.body,
-      category: req.body.category,
-      featureImage: req.body.featureImage,
-      postDate: new Date().toISOString().split('T')[0], // Set postDate as current date (YYYY-MM-DD format)
-    };
-    blogService.addPost(postData)
-      .then(() => {
-        // Redirect to /posts after adding the post
-        res.redirect('/posts');
-      })
-      .catch((error) => {
-        console.error('Error adding post:', error);
-        res.status(500).send('Error adding post');
-      });
+    // TODO: Process the req.body and add it as a new Blog Post before redirecting to /posts
   }
 });
 
+// Initialize blog-service and start the server
 // Initialize blog-service and start the server
 blogService
   .initialize()
@@ -156,17 +141,38 @@ blogService
 
       res.render("blog", { data: viewData });
     });
-    // Handle category selection
-    app.get('/blog/category/:id', function (req, res) {
-      const categoryId = parseInt(req.params.id); // Get the value of the "id" parameter as an integer
-      blogService.getPostsByCategory(categoryId)
-        .then((posts) => {
-          res.render('blog', { data: { posts, viewingCategory: categoryId } });
-        })
-        .catch((error) => {
-          console.error(error);
-          res.render('blog', { data: { message: 'no results' } });
-        });
+
+    // Route to get a single post by ID
+    app.get('/blog/:id', async (req, res) => {
+      let viewData = {};
+
+      try {
+        let posts = [];
+        if (req.query.category) {
+          posts = await blogService.getPublishedPostsByCategory(req.query.category);
+        } else {
+          posts = await blogService.getPublishedPosts();
+        }
+        posts.sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
+        let post = posts.find(post => post.id === parseInt(req.params.id));
+        if (post) {
+          viewData.posts = posts;
+          viewData.post = post;
+        } else {
+          viewData.message = "no results";
+        }
+      } catch (error) {
+        viewData.message = "no results";
+      }
+
+      try {
+        let categories = await blogService.getCategories();
+        viewData.categories = categories;
+      } catch (error) {
+        viewData.categoriesMessage = "no results";
+      }
+
+      res.render("blog", { data: viewData });
     });
 
     app.get('/posts', function(req, res) {
@@ -191,14 +197,14 @@ blogService
         .getPostById(postId)
         .then((post) => {
           if (post) {
-            res.render('singlePost', { post }); // Render the "singlePost" view with the post data
+            res.render('post', { post });
           } else {
-            res.status(404).render('404'); // Render the "404" view if the post is not found
+            res.status(404).render('404');
           }
         })
         .catch((error) => {
           console.error(error);
-          res.status(500).render('500'); // Render the "500" view for any errors
+          res.status(500).send({ message: error });
         });
     });
 
@@ -220,7 +226,7 @@ blogService
 
     // Route for unmatched routes
     app.get('*', function (req, res) {
-      res.status(404).render('404'); // Render the "404" view for unmatched routes
+      res.status(404).send('Page Not Found');
     });
 
     // Start the server and listen on the specified port
