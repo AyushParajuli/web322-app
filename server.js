@@ -1,3 +1,13 @@
+/********************************************************************************* * 
+ * WEB322 – Assignment 04 
+ * I declare that this assignment is my own work in accordance with Seneca Academic Policy. 
+ * No part of this assignment has been copied manually or electronically from any other source 
+ *  (including 3rd party web sites) or distributed to other students.
+ * Name: Ayush Parajuli Student ID: 165601212 Date: 2023-07-09
+ * Cyclic Web App URL: https://odd-ruby-bullfrog-belt.cyclic.app/about
+ *  GitHub Repository URL: https://github.com/AyushParajuli/web322-app * ********************************************************************************/
+
+
 var express = require('express');
 var app = express();
 require('dotenv').config();
